@@ -33,6 +33,27 @@ struct AdvancedSearchView: View {
         return "Completed Date"
     }
 
+    struct MultipleSelectionRow: View {
+        var title: String
+        var isSelected: Bool
+        var action: () -> Void
+
+        var body: some View {
+            Button(action: self.action) {
+                HStack {
+                    Button(action: {
+//                            showingPopover = false
+                    }) {
+                        Text("Search")
+                    }
+                        Spacer()
+                        Image(systemName: "chevron")
+                    
+                }
+            }
+        }
+    }
+    
     var body: some View {
         NavigationView {
                     Form {
@@ -40,11 +61,14 @@ struct AdvancedSearchView: View {
                             TextField("Claim Number", text: $name)
                             TextField("Street, City, or Zip", text: $address)
                             TextField("Policy Number", text: $policy)
-                            Picker(selection: $previewIndex, label: Text("Type of Loss")) {
-                                ForEach(0 ..< lossTypes.count) {
-                                    Text(self.lossTypes[$0])
-                                }
-                            }
+//                            Picker(selection: $previewIndex, label: Text("Type of Loss")) {
+//                                ForEach(0 ..< lossTypes.count) {
+//                                    Text(self.lossTypes[$0])
+//                                }
+//                            }
+                            MultipleSelectionRow(title: "String", isSelected: true, action: {
+                                
+                            })
         
                             if dateRangeEnabled {
                                 DatePicker("Starting Date", selection: $startingDate, in:...endingDate, displayedComponents: .date)
